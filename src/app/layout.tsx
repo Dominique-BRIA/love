@@ -1,44 +1,33 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { Plus_Jakarta_Sans, Playfair_Display, Dancing_Script } from "next/font/google";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL
-  ?? (process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : "https://divine-flamme.vercel.app");
+const sans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
+const serif = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-serif",
+  style: ["normal", "italic"],
+});
+
+const script = Dancing_Script({
+  subsets: ["latin"],
+  variable: "--font-script",
+});
 
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: "Pour Divine — Une déclaration sincère",
-  description:
-    "Un site doux, élégant et interactif pour déclarer une flamme à Divine.",
-  openGraph: {
-    title: "Pour Divine — Une déclaration sincère",
-    description:
-      "Un petit coin d’internet créé avec soin pour Divine, avec des mots vrais et beaucoup de douceur.",
-    images: [
-      {
-        url: "/divine-og.svg",
-        width: 1200,
-        height: 630,
-        alt: "Pour Divine, une déclaration sincère",
-      },
-    ],
-    locale: "fr_FR",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Pour Divine — Une déclaration sincère",
-    description: "Une déclaration élégante, tendre et interactive pour Divine.",
-    images: ["/divine-og.svg"],
-  },
+  title: "Pour Divine - Une Déclaration Unique",
+  description: "À celle qui illumine mon monde. Une déclaration de flamme interactive et poétique.",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="fr" className="scroll-smooth">
-      <body className="min-h-screen bg-[#140612] text-white antialiased">
+    <html lang="fr" className={`${sans.variable} ${serif.variable} ${script.variable} scroll-smooth`}>
+      <body className="bg-[#0f0c1b] text-[#f3e8ff] font-sans antialiased selection:bg-pink-500 selection:text-white overflow-x-hidden">
         {children}
       </body>
     </html>
