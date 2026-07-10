@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/db';
+import { db, ensureDatabaseSchema } from '@/db';
 import { loveDeclarations } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
 // Get the main love declaration (or create default if not exists)
 export async function GET() {
   try {
+    await ensureDatabaseSchema();
     let declarations = await db.select().from(loveDeclarations);
     
     if (declarations.length === 0) {
@@ -30,6 +31,7 @@ export async function GET() {
 // Update declaration or submit RSVP from Divine
 export async function POST(request: Request) {
   try {
+    await ensureDatabaseSchema();
     const body = await request.json();
     const { id, action, rsvpAnswer, divineReply, divinePhoneOrInsta, ...updateFields } = body;
     

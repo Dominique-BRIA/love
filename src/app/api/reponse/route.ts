@@ -1,10 +1,11 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { db } from "@/db";
+import { db, ensureDatabaseSchema } from "@/db";
 import { loveResponses } from "@/db/schema";
 import { desc } from "drizzle-orm";
 
 export async function GET() {
   try {
+    await ensureDatabaseSchema();
     const responses = await db
       .select()
       .from(loveResponses)
@@ -22,6 +23,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
   try {
+    await ensureDatabaseSchema();
     const body = await request.json();
 
     const [inserted] = await db

@@ -2,22 +2,31 @@ import { NextResponse } from 'next/server';
 import JSZip from 'jszip';
 import fs from 'fs/promises';
 import path from 'path';
-import { db } from '@/db';
+import { db, ensureDatabaseSchema } from '@/db';
 import { loveDeclarations } from '@/db/schema';
 
 export async function GET() {
   try {
     const zip = new JSZip();
 
-    // Fetch the latest customized declaration
-    const decls = await db.select().from(loveDeclarations);
-    const customData = decls[0] || {
+    // Fetch the latest customized declaration. Keep ZIP export available even
+    // when a remote database is still being provisioned.
+    const defaultData = {
       title: "Une Déclaration Sincère",
       suitorName: "Ton Admirateur Secret",
       recipientName: "Divine",
       loveLetter: "Divine,\n\nDepuis le premier instant où mes yeux se sont posés sur toi...",
       dateIdea: "Un dîner sous les étoiles",
     };
+
+    let customData: typeof defaultData | (typeof loveDeclarations.$inferSelect) = defaultData;
+    try {
+      await ensureDatabaseSchema();
+      const decls = await db.select().from(loveDeclarations);
+      customData = decls[0] || defaultData;
+    } catch (error) {
+      console.warn('Database unavailable during ZIP export, using defaults:', error);
+    }
 
     // Helper to add file from file system
     const addFileToZip = async (filePath: string, zipPath: string) => {
@@ -51,7 +60,7 @@ Ce magnifique site Next.js Fullstack (App Router + Tailwind + Drizzle ORM) a ét
       'next.config.ts',
       'postcss.config.mjs',
       'eslint.config.mjs',
-      'drizzle.config.json',
+      'drizzle.config.ts',
       'src/app/globals.css',
       'src/app/layout.tsx',
       'src/app/page.tsx',

@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/db';
+import { db, ensureDatabaseSchema } from '@/db';
 import { loveMessages } from '@/db/schema';
 import { desc, eq } from 'drizzle-orm';
 
 export async function GET() {
   try {
+    await ensureDatabaseSchema();
     let messages = await db.select().from(loveMessages).orderBy(desc(loveMessages.createdAt));
 
     if (messages.length === 0) {
@@ -34,6 +35,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    await ensureDatabaseSchema();
     const body = await request.json();
     const { action, id, author, message } = body;
 

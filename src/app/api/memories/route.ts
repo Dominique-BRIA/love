@@ -1,10 +1,11 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/db';
+import { db, ensureDatabaseSchema } from '@/db';
 import { romanticMemories } from '@/db/schema';
 import { asc } from 'drizzle-orm';
 
 export async function GET() {
   try {
+    await ensureDatabaseSchema();
     let memories = await db.select().from(romanticMemories).orderBy(asc(romanticMemories.displayOrder));
 
     if (memories.length === 0) {
@@ -52,6 +53,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
+    await ensureDatabaseSchema();
     const body = await request.json();
     const { title, description, tag, category } = body;
 
