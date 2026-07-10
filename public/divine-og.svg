@@ -1,0 +1,25 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#160616"/>
+  <circle cx="170" cy="120" r="230" fill="#FF5EA8" fill-opacity="0.26"/>
+  <circle cx="1040" cy="520" r="270" fill="#FFD166" fill-opacity="0.22"/>
+  <circle cx="870" cy="90" r="190" fill="#A855F7" fill-opacity="0.25"/>
+  <path d="M0 438C180 356 309 410 455 468C640 541 801 507 960 421C1057 369 1138 342 1200 360V630H0V438Z" fill="#3A0C2D" fill-opacity="0.72"/>
+  <g filter="url(#shadow)">
+    <path d="M600 466C570 438 448 330 448 234C448 176 493 132 549 132C581 132 601 147 600 148C599 147 619 132 651 132C707 132 752 176 752 234C752 330 630 438 600 466Z" fill="url(#heart)"/>
+  </g>
+  <text x="600" y="110" text-anchor="middle" fill="#FCE7F3" font-family="Georgia, 'Times New Roman', serif" font-size="34" letter-spacing="8">POUR DIVINE</text>
+  <text x="600" y="545" text-anchor="middle" fill="white" font-family="Georgia, 'Times New Roman', serif" font-size="72" font-weight="700">Une déclaration sincère</text>
+  <text x="600" y="590" text-anchor="middle" fill="#F9A8D4" font-family="Arial, sans-serif" font-size="24">un petit coin d’internet créé avec douceur</text>
+  <defs>
+    <filter id="shadow" x="388" y="82" width="424" height="444" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#000000" flood-opacity="0.35"/>
+      <feDropShadow dx="0" dy="0" stdDeviation="22" flood-color="#FF7ABF" flood-opacity="0.38"/>
+    </filter>
+    <linearGradient id="heart" x1="448" y1="132" x2="762" y2="445" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF1F2"/>
+      <stop offset="0.35" stop-color="#FDA4AF"/>
+      <stop offset="0.72" stop-color="#F472B6"/>
+      <stop offset="1" stop-color="#C026D3"/>
+    </linearGradient>
+  </defs>
+</svg>

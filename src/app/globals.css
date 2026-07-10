@@ -1,0 +1,214 @@
+@import "tailwindcss";
+
+:root {
+  --rose-glow: rgba(255, 106, 180, 0.45);
+  --gold-glow: rgba(255, 209, 102, 0.35);
+  --violet-glow: rgba(168, 85, 247, 0.38);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #140612;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(255, 182, 193, 0.45);
+  color: #fff;
+}
+
+.handwritten {
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.glass {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.18),
+    rgba(255, 255, 255, 0.06)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  backdrop-filter: blur(24px);
+}
+
+.love-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.love-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top left, rgba(255, 255, 255, 0.22), transparent 32%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 42%);
+  opacity: 0;
+  transition: opacity 300ms ease;
+  pointer-events: none;
+}
+
+.love-card:hover::before {
+  opacity: 1;
+}
+
+.shine-text {
+  background: linear-gradient(90deg, #fff7ed, #fbcfe8, #f9a8d4, #fde68a, #fff7ed);
+  background-size: 260% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 8s linear infinite;
+}
+
+.floating-heart {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.7rem;
+  height: 2.7rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 0 28px rgba(255, 105, 180, 0.22);
+  backdrop-filter: blur(12px);
+  animation: float-heart 9s ease-in-out infinite;
+}
+
+.star-dot {
+  position: absolute;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 9999px;
+  background: white;
+  opacity: 0.75;
+  box-shadow: 0 0 20px white;
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+.heartbeat {
+  animation: heartbeat 1.7s ease-in-out infinite;
+}
+
+.pulse-ring {
+  position: absolute;
+  inset: -0.65rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  animation: pulse-ring 2.2s ease-out infinite;
+}
+
+.confetti-piece {
+  position: fixed;
+  top: -2rem;
+  z-index: 60;
+  width: 0.72rem;
+  height: 1rem;
+  border-radius: 9999px;
+  animation: confetti-fall 3.4s ease-in forwards;
+  pointer-events: none;
+}
+
+.ribbon-line {
+  position: relative;
+}
+
+.ribbon-line::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 1px;
+  height: 4rem;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.55), transparent);
+}
+
+@keyframes shine {
+  to {
+    background-position: 260% center;
+  }
+}
+
+@keyframes float-heart {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-4deg);
+  }
+  50% {
+    transform: translate3d(0.55rem, -1.15rem, 0) rotate(7deg);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    transform: scale(0.75);
+    opacity: 0.35;
+  }
+  50% {
+    transform: scale(1.25);
+    opacity: 0.95;
+  }
+}
+
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  16% {
+    transform: scale(1.1);
+  }
+  32% {
+    transform: scale(1);
+  }
+  48% {
+    transform: scale(1.08);
+  }
+  64% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.82);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(680deg);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
